@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Comments!</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="javascripts/toDo.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="stylesheets/styles.css">
+</head>
+
+<body>
+<form id="commentForm" action="">
+  <label for="ID">Unique ID: </label><input type="text" id="ID" placeholder="Your ID"><br>
+  <label for="Item">To Do Item: </label><input type="text" id="Item" placeholder="To Do Item"><br>
+  <form>
+	<h2>What is the importance of this item?</h2>
+	<label>
+		<input type="radio" name="importance" id="question" value="1">
+		Can get this done whenever I feel like it. 
+		</input><br>
+	</label>
+	<label>
+		<input type="radio" name="importance" id="question" value="2">
+		Definitely needs to get done, but not very concerned about it. 
+		</input>
+	</label><br>
+	<label>
+		<input type="radio" name="importance" id="question" value="3">
+		Needs to be done sooner rather than later 
+		</input> 
+	</label><br>
+	<label>
+		<input type="radio" name="importance" id="question" value="4">
+		Needs to be done as soon as possible.
+	</label><br>
+  </form>
+</form>
+
+<button id="add">Add Item</button>
+<button id="getThem">Get Current List</button>
+<div id="json"></div>
+<div id="done"></div>
+<div id="comments"></div>
+</body>
+</html>
