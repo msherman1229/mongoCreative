@@ -10,7 +10,8 @@ $(document).ready(function(){
 	    data:jobj, 
 	    contentType:"application/json; charset=utf-8", 
 	    success:function(data,textStatus) {
-	        $("#done").html(textStatus); 
+		var doneHTML = "<h2>" + $("#Item").val() + " has been added to your to do list!<h2>"; 
+	        $("#done").html(doneHTML); 
 	    }
         });
     });
@@ -57,7 +58,40 @@ $(document).ready(function(){
 			url:removeUrl, 
 			type:"DELETE", 
 			contentType:"application/json; charset=utf-8", 
-			success:function() {}
+			success:function() {
+				var getUrl = "list" + "?q=" + $("#ID").val();
+        $.ajax({
+                url:getUrl,
+                type:"GET",
+                contentType:"application/json; charset=utf-8",
+                success:function(data, textStatus) {
+                        var everything = "<table class='table'><th>Done?</th><th>Current Items</th><tbody>";
+                        for (var item in data) {
+                                it = data[item];
+                                var color = "white";
+                                if (it.Importance == 1)
+                                {
+                                        color = "lightblue";
+                                }
+                                else if (it.Importance == 2)
+                                {
+                                        color = "lightgreen";
+                                }
+                                else if (it.Importance == 3)
+                                {
+                                        color = "yellow";
+                                }
+                                else if (it.Importance == 4)
+                                {
+                                        color = "red";
+                                }
+                                everything += "<tr bgcolor=" + color + "><td class='col-md-1'><input type='checkbox' name='complete' class='checked' id=" + it._id + "></td><td class='col-md-11'>" + it.Item + "</td>";
+                        }
+                        everything += "</tbody></table>";
+                        $("#list").html(everything);
+                }
+        });
+			}
 		}); 
 		}
 	});
