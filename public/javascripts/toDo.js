@@ -8,13 +8,13 @@ $(document).ready(function(){
     $("#createNewList").click(function() {
     	globalID = $("#ID").val();
 	globalID = globalID.replace(/\s/g, '');  
-	$("#ID").hide();
-	$("#createNewList").hide();  
+	$("#ID").val("");
+	$("#createNewList").text("Access a Different List");  
 	$("#questionDiv").show();
 	$("#add").show();
 	$("#updateThem").show();
 	$("#Item").show();
-	$("#list-head").text("Current To-Do List");
+	$("#list-head").text("Current List");
 	$("#add-head").text("Add New Item");  
 	var getUrl = "list" + "?q=" + globalID;
         $.ajax({
@@ -52,7 +52,7 @@ $(document).ready(function(){
     $("#add").click(function(){
         var myobj = {ID:globalID,Item:$("#Item").val(),Importance:$("input[name=importance]:checked").val(),Completed:0};
         jobj = JSON.stringify(myobj);
-        //$("#json").text(jobj);
+	$("#Item").val("");
         var url = "list"; 
         $.ajax({
 	    url:url, 
