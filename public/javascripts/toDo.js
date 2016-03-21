@@ -21,7 +21,7 @@ $(document).ready(function(){
 		type:"GET",  
 		contentType:"application/json; charset=utf-8", 
 		success:function(data, textStatus) {
-			var everything = "<table class='table'><th>Current To Do List</th><tbody>";
+			var everything = "<table class='table'><th>Done?</th><th>Current Items</th><tbody>";
 			for (var item in data) {
 				it = data[item];
 				var color = "white";
@@ -31,20 +31,20 @@ $(document).ready(function(){
 				}
 				else if (it.Importance == 2)
 				{
-					color = "purple"; 
+					color = "lightgreen"; 
 				}
 				else if (it.Importance == 3)
 				{
-					color = "orange";
+					color = "yellow";
 				}
 				else if (it.Importance == 4)
 				{
 					color = "red";
 				}
-				everything += "<tr bgcolor=" + color + "><td>ID : " + it.ID + " -- Item: " + it.Item + " --Importance " + it.Importance + " -- Completed? " + it.Completed; 
+				everything += "<tr bgcolor=" + color + "><td class='col-md-1'><input type='checkbox' name='complete'></td><td class='col-md-11'>" + it.Item + "</td>";
 			}
 			everything += "</tbody></table>"; 
-			$("#comments").html(everything); 
+			$("#list").html(everything); 
 		}
 	}); 
 	});  

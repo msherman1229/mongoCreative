@@ -1,1 +1,3 @@
-
+.chekcer:checked + .strikethis {
+text-decoration: line-through;
+}  
