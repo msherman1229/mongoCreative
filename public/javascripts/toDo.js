@@ -1,8 +1,58 @@
 $(document).ready(function(){
+    var globalID; 
+    $("#add").hide();
+    $("#getThem").hide();
+    $("#updateThem").hide();
+    $("#questionDiv").hide();
+    $("#Item").hide();
+    $("#createNewList").click(function() {
+    	globalID = $("#ID").val();
+	globalID = globalID.replace(/\s/g, '');  
+	$("#ID").hide();
+	$("#createNewList").hide();  
+	$("#questionDiv").show();
+	$("#add").show();
+	$("#updateThem").show();
+	$("#Item").show();
+	$("#list-head").text("Current To-Do List");
+	$("#add-head").text("Add New Item");  
+	var getUrl = "list" + "?q=" + globalID;
+        $.ajax({
+                url:getUrl,
+                type:"GET",
+                contentType:"application/json; charset=utf-8",
+                success:function(data, textStatus) {
+                        var everything = "<table class='table'><th>Done?</th><th>Current Items</th><tbody>";
+                        for (var item in data) {
+                                it = data[item];
+                                var color = "azure";
+                                if (it.Importance == 1)
+                                {
+                                        color = "lightblue";
+                                }
+                                else if (it.Importance == 2)
+                                {
+                                        color = "lightgreen";
+                                }
+                                else if (it.Importance == 3)
+                                {
+                                        color = "yellow";
+                                }
+                                else if (it.Importance == 4)
+                                {
+                                        color = "red";
+                                }
+                                everything += "<tr bgcolor=" + color + "><td class='col-md-1'><input type='checkbox' name='complete' class='checked' id=" + it._id + "></td><td class='col-md-11'>" + it.Item + "</td>";
+                        }
+                        everything += "</tbody></table>";
+                        $("#list").html(everything);
+                }
+        });
+    });   
     $("#add").click(function(){
-        var myobj = {ID:$("#ID").val(),Item:$("#Item").val(),Importance:$("input[name=importance]:checked").val(),Completed:0};
+        var myobj = {ID:globalID,Item:$("#Item").val(),Importance:$("input[name=importance]:checked").val(),Completed:0};
         jobj = JSON.stringify(myobj);
-        $("#json").text(jobj);
+        //$("#json").text(jobj);
         var url = "list"; 
         $.ajax({
 	    url:url, 
@@ -10,13 +60,43 @@ $(document).ready(function(){
 	    data:jobj, 
 	    contentType:"application/json; charset=utf-8", 
 	    success:function(data,textStatus) {
-		var doneHTML = "<h2>" + $("#Item").val() + " has been added to your to do list!<h2>"; 
-	        $("#done").html(doneHTML); 
+		var getUrl = "list" + "?q=" + globalID;
+        $.ajax({
+                url:getUrl,
+                type:"GET",
+                contentType:"application/json; charset=utf-8",
+                success:function(data, textStatus) {
+                        var everything = "<table class='table'><th>Done?</th><th>Current Items</th><tbody>";
+                        for (var item in data) {
+                                it = data[item];
+                                var color = "azure";
+                                if (it.Importance == 1)
+                                {
+                                        color = "lightblue";
+                                }
+                                else if (it.Importance == 2)
+                                {
+                                        color = "lightgreen";
+                                }
+                                else if (it.Importance == 3)
+                                {
+                                        color = "yellow";
+                                }
+                                else if (it.Importance == 4)
+                                {
+                                        color = "red";
+                                }
+                                everything += "<tr bgcolor=" + color + "><td class='col-md-1'><input type='checkbox' name='complete' class='checked' id=" + it._id + "></td><td class='col-md-11'>" + it.Item + "</td>";
+                        }
+                        everything += "</tbody></table>";
+                        $("#list").html(everything);
+                }
+        });
 	    }
         });
     });
     $("#getThem").click(function() {
-	var getUrl = "list" + "?q=" + $("#ID").val();  
+	var getUrl = "list" + "?q=" + globalID;  
 	$.ajax({
 		url:getUrl, 
 		type:"GET",  
@@ -25,7 +105,7 @@ $(document).ready(function(){
 			var everything = "<table class='table'><th>Done?</th><th>Current Items</th><tbody>";
 			for (var item in data) {
 				it = data[item];
-				var color = "white";
+				var color = "azure";
 				if (it.Importance == 1)
 				{
 					color = "lightblue";
@@ -59,7 +139,7 @@ $(document).ready(function(){
 			type:"DELETE", 
 			contentType:"application/json; charset=utf-8", 
 			success:function() {
-				var getUrl = "list" + "?q=" + $("#ID").val();
+				var getUrl = "list" + "?q=" + globalID;
         $.ajax({
                 url:getUrl,
                 type:"GET",
@@ -68,7 +148,7 @@ $(document).ready(function(){
                         var everything = "<table class='table'><th>Done?</th><th>Current Items</th><tbody>";
                         for (var item in data) {
                                 it = data[item];
-                                var color = "white";
+                                var color = "azure";
                                 if (it.Importance == 1)
                                 {
                                         color = "lightblue";

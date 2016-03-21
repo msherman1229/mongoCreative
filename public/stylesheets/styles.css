@@ -1,3 +1,16 @@
 .chekcer:checked + .strikethis {
 text-decoration: line-through;
+}
+.page-header {
+background: yellow; 
+padding-top: 5px;
+padding-left: 5px; 
+}
+img {
+width: 50px;
+padding-left: 10px;
+padding-bottom: 10px; 
+}
+p {
+margin-top: -11px;
 }  

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Comments!</title>
+  <title>To-Do List</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="javascripts/toDo.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -10,14 +10,19 @@
 <body>
 <div class="container">
 <div class="page-header">
-	<h1>Finals To-Do List</h1>
+	<h1 id="main-header">Finals To-Do List<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Check_mark_23x20_02.svg/1081px-Check_mark_23x20_02.svg.png"></h1>
+	<p id="info">To create your own to do list for finals just enter in an ID that you would like your To Do list to be grouped by. Then just start adding items. We will save the items in a database, so you can retrieve and update your list as long as you remember the ID of the list!</p>
 </div>
+<h2 id="list-head"></h2>
 <div id="list"></div>
+<button id="getThem" class="btn btn-primary btn-outline">Get Current List</button>
+<button id="updateThem" class="btn btn-danger btn-outline">Remove Completed</button>
 <form id="commentForm" action="">
-  <label for="ID">Unique ID: </label><input type="text" id="ID" placeholder="Your ID" class="form-control"><br>
-  <label for="Item">To Do Item: </label><input type="text" id="Item" placeholder="To Do Item" class="form-control"><br>
-  <form>
-	<h2>What is the importance of this item?</h2>
+  <label for="ID"></label><input type="text" id="ID" placeholder="Your ID" class="form-control"><br>
+   <h2 id="add-head"></h2>
+   <label for="Item"></label><input type="text" id="Item" placeholder="To Do Item" class="form-control"><br>
+  <form id="importanceQuestion">
+  <div id="questionDiv">
 	<label>
 		<input type="radio" name="importance" id="question" value="1">
 		Can get this done whenever I feel like it. 
@@ -37,12 +42,12 @@
 		<input type="radio" name="importance" id="question" value="4">
 		Needs to be done as soon as possible.
 	</label><br>
+	</div>
   </form>
 </form>
 
 <button id="add">Add Item</button>
-<button id="getThem">Get Current List</button>
-<button id="updateThem">Remove Completed</button>
+<button id="createNewList" class="btn btn-primary btn-lg">Access List</button>
 <div id="added"></div>
 <div id="json"></div>
 <div id="done"></div>
