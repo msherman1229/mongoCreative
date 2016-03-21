@@ -43,4 +43,17 @@ router.get('/list', function(req,res,next) {
 	});    
 }); 
 
+router.delete('/list', function(req,res,next) {
+	console.log("In the REMOVE route"); 
+	console.log(req.query.q);  
+	Item.remove({_id:req.query.q}, function(err,removal) {
+		if (err) return console.error(err); 
+		else {
+			console.log(removal);
+			return; 
+		} 
+	}); 
+	res.sendStatus(200); 
+});
+
 module.exports = router;

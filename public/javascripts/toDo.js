@@ -41,11 +41,25 @@ $(document).ready(function(){
 				{
 					color = "red";
 				}
-				everything += "<tr bgcolor=" + color + "><td class='col-md-1'><input type='checkbox' name='complete'></td><td class='col-md-11'>" + it.Item + "</td>";
+				everything += "<tr bgcolor=" + color + "><td class='col-md-1'><input type='checkbox' name='complete' class='checked' id=" + it._id + "></td><td class='col-md-11'>" + it.Item + "</td>";
 			}
 			everything += "</tbody></table>"; 
 			$("#list").html(everything); 
 		}
 	}); 
 	});  
+    $("#updateThem").click(function() {
+	$(".checked").each(function() {
+		if ($(this).is(':checked'))
+		{
+		var removeUrl = "list" + "?q=" + $(this).attr('id');
+		$.ajax({
+			url:removeUrl, 
+			type:"DELETE", 
+			contentType:"application/json; charset=utf-8", 
+			success:function() {}
+		}); 
+		}
+	});
+	}); 
 });
